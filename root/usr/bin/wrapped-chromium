@@ -1,10 +1,10 @@
 #!/bin/bash
 
-BIN=/usr/bin/chromium
+BIN=/usr/bin/brave-browser
 
 # Cleanup
-if ! pgrep chromium > /dev/null;then
-  rm -f $HOME/.config/chromium/Singleton*
+if ! pgrep brave-browser > /dev/null;then
+  rm -f $HOME/.config/brave-browser/Singleton*
 fi
 
 # Run normally on privved containers or modified un non priv
@@ -15,7 +15,7 @@ if grep -q 'Seccomp:.0' /proc/1/status; then
   --no-first-run \
   --password-store=basic \
   --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT' \
-  --start-maximized \
+  --start-fullscreen \
   --user-data-dir \
   --disable-session-crashed-bubble \
   --hide-crash-restore-bubble \
@@ -28,7 +28,7 @@ else
   --no-sandbox \
   --password-store=basic \
   --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT' \
-  --start-maximized \
+  --start-fullscreen \
   --test-type \
   --user-data-dir \
   --disable-session-crashed-bubble \
