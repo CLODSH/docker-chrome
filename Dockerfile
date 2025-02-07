@@ -4,19 +4,18 @@ FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="nobodywatchin"
+LABEL maintainer="gitxpresso"
 
 # title
-ENV TITLE=Brave
-
+ENV TITLE=Chrome
+RUN apt update && apt install -y wget
 RUN \
   echo "**** add icon ****" && \
   curl -o \
     /kclient/public/icon.png \
     https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/chromium-logo.png && \
-  curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg && \
-  echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list && \
-  echo "**** install packages ****" && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo apt install -y ./google-chrome-stable_current_amd64.deb && sudo rm -rf google-chrome-stable_current_amd64.deb && \  
+   echo "**** install packages ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     brave-browser && \
